@@ -27,6 +27,7 @@ namespace ContactManager
         public MainWindow()
         {
             InitializeComponent();
+
         }
         private void WrapPanel_Loaded(object sender, RoutedEventArgs e)
         {        

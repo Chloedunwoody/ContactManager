@@ -27,14 +27,23 @@ namespace ContactManager
        
 
         public UpadatePerson(int PersonId)
-        {            
+        {           
             InitializeComponent();
             personId = PersonId;
-            
         }
         private void SavePersonButton_Click(object sender, RoutedEventArgs e)
         {
+            Person updatedPerson = new Person();
+            TextBox firstNameBox = FirstNameBox;
+            TextBox lastNameBox = LastNameBox;
+            TextBox emailBox = EmailBox;
+            TextBox phoneBox = PhoneBox;
 
+            updatedPerson.FirstName = firstNameBox.ToString();
+            updatedPerson.LastName = lastNameBox.ToString();
+            updatedPerson.Email = emailBox.ToString();
+            updatedPerson.Phone = phoneBox.ToString();
+            db.UpdatePerson(updatedPerson);
         }
 
         private void ChosenPerson_Loaded(object sender, RoutedEventArgs e)

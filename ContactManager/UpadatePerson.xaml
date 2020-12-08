@@ -15,22 +15,22 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
-                        <StackPanel>
+                        <WrapPanel>
                             <Label Content="First Name: " FontWeight="Bold"/>
-                            <TextBox Text="{Binding FirstName}"/>
-                        </StackPanel>
-                        <StackPanel>
+                            <TextBox x:Name="FirstNameBox" Text="{Binding FirstName}"/>
+                        </WrapPanel>
+                        <WrapPanel>
                             <Label Content="Last Name: " FontWeight="Bold"/>
-                            <TextBox Text="{Binding LastName}" />
-                        </StackPanel>
-                        <StackPanel>
+                            <TextBox x:Name="LastNameBox" Text="{Binding LastName}" />
+                        </WrapPanel>
+                        <WrapPanel>
                             <Label Content="Email: " FontWeight="Bold"/>
-                            <TextBox Text="{Binding Email}"/>
-                        </StackPanel>
-                        <StackPanel>
+                            <TextBox x:Name="EmailBox" Text="{Binding Email}"/>
+                        </WrapPanel>
+                        <WrapPanel>
                             <Label Content="Phone: " FontWeight="Bold"/>
-                            <TextBox Text="{Binding Phone}" />
-                        </StackPanel>
+                            <TextBox x:Name="PhoneBox" Text="{Binding Phone}" />
+                        </WrapPanel>
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>

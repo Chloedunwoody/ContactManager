@@ -74,7 +74,7 @@ namespace ContactManager
             }
         }
               
-    public int AddPerson(Person person)
+        public int AddPerson(Person person)
         {
             int newID = 0;
             int row = -1;
@@ -106,6 +106,35 @@ namespace ContactManager
                 }
             }
             return newID;
+        }
+
+        public int UpdatePerson(Person person)
+        {
+            int row = -1;
+
+            using (SqlConnection con = new SqlConnection(ConString))
+            {
+                con.Open();
+
+                string query = "UPDATE Person SET FirstName = @FirstName, LastName = @LastName, Email = @Email, Phone = @Phone, WHERE Id = @Id";
+
+                SqlCommand command = new SqlCommand(query, con);
+                command.Parameters.AddWithValue("@Id", person.Id);
+                command.Parameters.AddWithValue("@FirstName", person.FirstName);
+                command.Parameters.AddWithValue("@LastName", person.LastName);
+                command.Parameters.AddWithValue("@Email", person.Email);
+                command.Parameters.AddWithValue("@Phone", person.Phone);
+
+                try
+                {
+                    row = command.ExecuteNonQuery();
+                }
+                catch (SqlException e)
+                {
+                    Console.WriteLine("Error Generated. Details: " + e.ToString());
+                }
+                return row;
+            }
         }
     }
 }

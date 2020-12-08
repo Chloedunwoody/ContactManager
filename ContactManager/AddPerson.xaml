@@ -15,24 +15,24 @@
         <ListView Margin="10" x:Name="lvDataBinding">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <WrapPanel>
-                        <StackPanel>
+                    <StackPanel>
+                        <WrapPanel>
                             <Label Content="First Name: " FontWeight="Bold"/>
-                            <TextBox Text="{Binding FirstName}" FontWeight="Bold"/>
-                        </StackPanel>
-                        <StackPanel>
+                            <TextBox Text="{Binding FirstName}"/>
+                        </WrapPanel>
+                        <WrapPanel>
                             <Label Content="Last Name: " FontWeight="Bold"/>
-                            <TextBox Text="{Binding Name}" FontWeight="Bold"/>
-                        </StackPanel>
-                        <StackPanel>
+                            <TextBox Text="{Binding LastName}" />
+                        </WrapPanel>
+                        <WrapPanel>
                             <Label Content="Email: " FontWeight="Bold"/>
-                            <TextBox Text="{Binding Name}" FontWeight="Bold"/>
-                        </StackPanel>
-                        <StackPanel>
+                            <TextBox Text="{Binding Email}"/>
+                        </WrapPanel>
+                        <WrapPanel>
                             <Label Content="Phone: " FontWeight="Bold"/>
-                            <TextBox Text="{Binding Name}" FontWeight="Bold"/>
-                        </StackPanel>
-                    </WrapPanel>
+                            <TextBox Text="{Binding Phone}" />
+                        </WrapPanel>
+                    </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
