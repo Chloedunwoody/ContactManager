@@ -4,9 +4,35 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ContactManager"
+        xmlns:system="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="Contact Manager" Height="450" Width="800">
+
+    <DockPanel Loaded="WrapPanel_Loaded">
+        <StackPanel DockPanel.Dock="Right">
+            <Button x:Name="AddButton" Content="Add Person" Margin="5,20,5,0" Click="AddButton_Click"/>
+            <Button x:Name="EditButton" Content="Edit Person" Margin="5,20,5,0" Click="EditButton_Click"/>
+            <Button x:Name="DeleteButton" Content="Delete Person" Margin="5,20,5,0" Click="DeleteButton_Click"/>
+        </StackPanel>
+        <ListView Margin="10" x:Name="lvDataBinding">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <WrapPanel>
+                        <TextBlock Text="Name: "/>
+                        <TextBlock Text="{Binding FirstName}" FontWeight="Bold" />
+                        <TextBlock Text=" "/>
+                        <TextBlock Text="{Binding LastName}" FontWeight="Bold"/>
+                        <TextBlock Text=", "/>
+                        <TextBlock Text="Email: "/>
+                        <TextBlock Text=" (" />
+                        <TextBlock Text="{Binding Email}" TextDecorations="Underline" Foreground="Blue" Cursor="Hand"/>
+                        <TextBlock Text=")"/>
+                        <TextBlock Text=", "/>
+                        <TextBlock Text="Phone: "/>
+                        <TextBlock Text="{Binding Phone}" FontWeight="Bold"/>
+                    </WrapPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </DockPanel>
 </Window>
