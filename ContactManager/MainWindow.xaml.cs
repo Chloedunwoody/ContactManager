@@ -29,15 +29,15 @@ namespace ContactManager
             InitializeComponent();
 
         }
-        private void Data_Loader(object sender, RoutedEventArgs e)
-        {        
-            List<Person> Peoplpe = db.ReadAllPersons();
-            foreach (var person in Peoplpe) 
-            { 
-                contactsList.Add(person);
-            }
-            lvDataBinding.ItemsSource = contactsList;
-        }
+        //private void Data_Loader(object sender, RoutedEventArgs e)
+        //{        
+        //    List<Person> Peoplpe = db.ReadAllPersons();
+        //    foreach (var person in Peoplpe) 
+        //    { 
+        //        contactsList.Add(person);
+        //    }
+        //    lvDataBinding.ItemsSource = contactsList;
+        //}
 
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
@@ -54,8 +54,16 @@ namespace ContactManager
             {
                 pId = (lvDataBinding.SelectedItem as Person).Id;
             }
-            UpadatePerson upadatePerson = new UpadatePerson(pId);
-            upadatePerson.Show();
+            if (pId != -1)
+            {
+                UpadatePerson upadatePerson = new UpadatePerson(pId);
+                upadatePerson.ShowDialog();
+            }
+            else 
+            {
+                MessageBox.Show("Chose a person to update","Warning!", MessageBoxButton.OK);
+            }
+            
 
         }
 
@@ -63,6 +71,19 @@ namespace ContactManager
         {
 
         }
-        
+
+        private void MainWindow_Activated(object sender, EventArgs e)
+        {
+            lvDataBinding.ItemsSource = contactsList;
+            contactsList.Clear();
+            List<Person> Peoplpe = db.ReadAllPersons();
+            foreach (var person in Peoplpe)
+            {
+                contactsList.Add(person);
+            }
+            lvDataBinding.ItemsSource = contactsList;
+
+        }
+
     }       
 }

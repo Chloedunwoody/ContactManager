@@ -46,6 +46,7 @@ namespace ContactManager
             {
                 case MessageBoxResult.Yes:
                     db.UpdatePerson(updatedPerson);
+                    
                     this.Close();
                     break;
                 case MessageBoxResult.No:
@@ -57,10 +58,7 @@ namespace ContactManager
                     this.Close();
                     break;
 
-            }
-            
-            
-            
+            }           
         }
 
         private void ChosenPerson_Loaded(object sender, RoutedEventArgs e)

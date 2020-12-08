@@ -6,9 +6,11 @@
         xmlns:local="clr-namespace:ContactManager"
         xmlns:system="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
+        Activated="MainWindow_Activated"
         Title="Contact Manager" Height="450" Width="800">
 
-    <DockPanel Loaded="Data_Loader">
+    <DockPanel>
+        <!--Loaded="Data_Loader"--> 
         <StackPanel DockPanel.Dock="Right">
             <Button x:Name="AddButton" Content="Add Person" Margin="5,20,5,0" Click="AddButton_Click"/>
             <Button x:Name="UpdateButton" Content="Update Person" Margin="5,20,5,0" Click="UpdateButton_Click"/>
