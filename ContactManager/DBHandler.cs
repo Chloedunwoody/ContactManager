@@ -27,6 +27,10 @@ namespace ContactManager
                     {
                         Person person = new Person();
 
+                        if (Int32.TryParse(reader["Id"].ToString(), out int id))
+                        {
+                            person.Id = id;
+                        }
                         person.FirstName = reader["FirstName"].ToString();
                         person.LastName = reader["LastName"].ToString();
                         person.Email = reader["Email"].ToString();
@@ -38,7 +42,39 @@ namespace ContactManager
                 }
             }
         }
-        public int AddPerson(Person person)
+
+        public Person GetPerson(int id)
+        {
+            Person person = new Person();
+
+            using (SqlConnection con = new SqlConnection(ConString))
+            {
+                con.Open();
+
+                SqlCommand command = new SqlCommand("Select * from Person WHERE Id = @Id", con);
+                command.Parameters.AddWithValue("@Id", id);
+
+            
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+
+                    while (reader.Read())
+                    {
+                        if (Int32.TryParse(reader["Id"].ToString(), out int id2))
+                        {
+                            person.Id = id2;
+                        }
+                        person.FirstName = reader["FirstName"].ToString();
+                        person.LastName = reader["LastName"].ToString();
+                        person.Email = reader["Email"].ToString();
+                        person.Phone = reader["Phone"].ToString();
+                    }
+                }
+                return person;
+            }
+        }
+              
+    public int AddPerson(Person person)
         {
             int newID = 0;
             int row = -1;

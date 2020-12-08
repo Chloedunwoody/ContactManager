@@ -11,13 +11,16 @@
     <DockPanel Loaded="WrapPanel_Loaded">
         <StackPanel DockPanel.Dock="Right">
             <Button x:Name="AddButton" Content="Add Person" Margin="5,20,5,0" Click="AddButton_Click"/>
-            <Button x:Name="EditButton" Content="Edit Person" Margin="5,20,5,0" Click="EditButton_Click"/>
+            <Button x:Name="UpdateButton" Content="Update Person" Margin="5,20,5,0" Click="UpdateButton_Click"/>
             <Button x:Name="DeleteButton" Content="Delete Person" Margin="5,20,5,0" Click="DeleteButton_Click"/>
         </StackPanel>
         <ListView Margin="10" x:Name="lvDataBinding">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel>
+                        <TextBlock Text="Id: "/>
+                        <TextBlock Text="{Binding Id}"  />
+                        <TextBlock Text=", "/>
                         <TextBlock Text="Name: "/>
                         <TextBlock Text="{Binding FirstName}" FontWeight="Bold" />
                         <TextBlock Text=" "/>

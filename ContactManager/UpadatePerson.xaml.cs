@@ -17,19 +17,31 @@ using System.Windows.Shapes;
 namespace ContactManager
 {
     /// <summary>
-    /// Interaction logic for AddPerson.xaml
+    /// Interaction logic for UpadatePerson.xaml
     /// </summary>
-    public partial class AddPerson : Window
+    public partial class UpadatePerson : Window
     {
-        
-        public AddPerson()
-        {
+        ObservableCollection<Person> contactsList = new ObservableCollection<Person>();
+        private int personId;
+        DBHandler db = new DBHandler();
+       
+
+        public UpadatePerson(int PersonId)
+        {            
             InitializeComponent();
+            personId = PersonId;
             
         }
         private void SavePersonButton_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void ChosenPerson_Loaded(object sender, RoutedEventArgs e)
+        {
+            Person person = db.GetPerson(personId);
+            contactsList.Add(person);
+            lvDataBinding.ItemsSource = contactsList;
         }
     }
 }

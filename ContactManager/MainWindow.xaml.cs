@@ -29,23 +29,32 @@ namespace ContactManager
             InitializeComponent();
         }
         private void WrapPanel_Loaded(object sender, RoutedEventArgs e)
-        {
-            lvDataBinding.ItemsSource = contactsList;
+        {        
             List<Person> Peoplpe = db.ReadAllPersons();
             foreach (var person in Peoplpe) 
             { 
                 contactsList.Add(person);
             }
+            lvDataBinding.ItemsSource = contactsList;
         }
 
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-
+            
+            AddPerson addPerson = new AddPerson();
+            addPerson.Show();
         }
 
-        private void EditButton_Click(object sender, RoutedEventArgs e)
+        private void UpdateButton_Click(object sender, RoutedEventArgs e)
         {
+            int pId = -1;
+            foreach (object o in lvDataBinding.SelectedItems)
+            {
+                pId = (lvDataBinding.SelectedItem as Person).Id;
+            }
+            UpadatePerson upadatePerson = new UpadatePerson(pId);
+            upadatePerson.Show();
 
         }
 
@@ -53,5 +62,6 @@ namespace ContactManager
         {
 
         }
+        
     }       
 }
