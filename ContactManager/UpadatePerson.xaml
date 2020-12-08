@@ -6,34 +6,30 @@
         xmlns:local="clr-namespace:ContactManager"
         xmlns:system="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="UpadatePerson" Height="450" Width="800">
+        Title="UpadatePerson" Height="300" Width="500">
     <DockPanel Loaded="ChosenPerson_Loaded">
         <StackPanel DockPanel.Dock="Right">
             <Button x:Name="SavePerson" Content="Save new Person" Margin="5,20,5,0" Click="SavePersonButton_Click"/>
         </StackPanel>
-        <ListView Margin="10" x:Name="lvDataBinding">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel>
-                        <WrapPanel>
-                            <Label Content="First Name: " FontWeight="Bold"/>
-                            <TextBox x:Name="FirstNameBox" Text="{Binding FirstName}"/>
-                        </WrapPanel>
-                        <WrapPanel>
-                            <Label Content="Last Name: " FontWeight="Bold"/>
-                            <TextBox x:Name="LastNameBox" Text="{Binding LastName}" />
-                        </WrapPanel>
-                        <WrapPanel>
-                            <Label Content="Email: " FontWeight="Bold"/>
-                            <TextBox x:Name="EmailBox" Text="{Binding Email}"/>
-                        </WrapPanel>
-                        <WrapPanel>
-                            <Label Content="Phone: " FontWeight="Bold"/>
-                            <TextBox x:Name="PhoneBox" Text="{Binding Phone}" />
-                        </WrapPanel>
-                    </StackPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+        <StackPanel>
+            <StackPanel>
+                <WrapPanel>
+                    <Label Content="First Name: " FontWeight="Bold"/>
+                    <TextBox x:Name="FirstNameBox"/>
+                </WrapPanel>
+                <WrapPanel>
+                    <Label Content="Last Name: " FontWeight="Bold"/>
+                    <TextBox x:Name="LastNameBox"/>
+                </WrapPanel>
+                <WrapPanel>
+                    <Label Content="Email: " FontWeight="Bold"/>
+                    <TextBox x:Name="EmailBox"/>
+                </WrapPanel>
+                <WrapPanel>
+                    <Label Content="Phone: " FontWeight="Bold"/>
+                    <TextBox x:Name="PhoneBox"/>
+                </WrapPanel>
+            </StackPanel>
+        </StackPanel>
     </DockPanel>
 </Window>

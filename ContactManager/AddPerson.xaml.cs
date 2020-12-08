@@ -21,7 +21,8 @@ namespace ContactManager
     /// </summary>
     public partial class AddPerson : Window
     {
-        
+        DBHandler db = DBHandler.Instance;
+
         public AddPerson()
         {
             InitializeComponent();

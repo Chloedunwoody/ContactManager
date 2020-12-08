@@ -22,14 +22,14 @@ namespace ContactManager
     public partial class MainWindow : Window
     {
         ObservableCollection<Person> contactsList = new ObservableCollection<Person>();
-        DBHandler db = new DBHandler();
+        DBHandler db = DBHandler.Instance;
 
         public MainWindow()
         {
             InitializeComponent();
 
         }
-        private void WrapPanel_Loaded(object sender, RoutedEventArgs e)
+        private void Data_Loader(object sender, RoutedEventArgs e)
         {        
             List<Person> Peoplpe = db.ReadAllPersons();
             foreach (var person in Peoplpe) 

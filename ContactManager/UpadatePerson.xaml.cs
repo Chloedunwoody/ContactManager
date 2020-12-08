@@ -21,11 +21,11 @@ namespace ContactManager
     /// </summary>
     public partial class UpadatePerson : Window
     {
-        ObservableCollection<Person> contactsList = new ObservableCollection<Person>();
+        Person person = new Person();
         private int personId;
-        DBHandler db = new DBHandler();
-       
+        DBHandler db = DBHandler.Instance;
 
+        
         public UpadatePerson(int PersonId)
         {           
             InitializeComponent();
@@ -34,23 +34,42 @@ namespace ContactManager
         private void SavePersonButton_Click(object sender, RoutedEventArgs e)
         {
             Person updatedPerson = new Person();
-            TextBox firstNameBox = FirstNameBox;
-            TextBox lastNameBox = LastNameBox;
-            TextBox emailBox = EmailBox;
-            TextBox phoneBox = PhoneBox;
+            updatedPerson.Id = personId;
+            updatedPerson.FirstName = FirstNameBox.Text;
+            updatedPerson.LastName = LastNameBox.Text;
+            updatedPerson.Email = EmailBox.Text;
+            updatedPerson.Phone = PhoneBox.Text;
 
-            updatedPerson.FirstName = firstNameBox.ToString();
-            updatedPerson.LastName = lastNameBox.ToString();
-            updatedPerson.Email = emailBox.ToString();
-            updatedPerson.Phone = phoneBox.ToString();
-            db.UpdatePerson(updatedPerson);
+            MessageBoxResult result = MessageBox.Show("Are you sure you want to save those changes?", "Warning!", MessageBoxButton.YesNoCancel);
+
+            switch (result)
+            {
+                case MessageBoxResult.Yes:
+                    db.UpdatePerson(updatedPerson);
+                    this.Close();
+                    break;
+                case MessageBoxResult.No:
+                    break;
+                case MessageBoxResult.Cancel:
+                    this.Close();
+                    break;
+                default:
+                    this.Close();
+                    break;
+
+            }
+            
+            
+            
         }
 
         private void ChosenPerson_Loaded(object sender, RoutedEventArgs e)
         {
             Person person = db.GetPerson(personId);
-            contactsList.Add(person);
-            lvDataBinding.ItemsSource = contactsList;
+            FirstNameBox.Text = person.FirstName;
+            LastNameBox.Text = person.LastName;
+            EmailBox.Text = person.Email;
+            PhoneBox.Text = person.Phone;
         }
     }
 }

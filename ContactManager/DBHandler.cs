@@ -8,10 +8,16 @@ using System.Data.SqlClient;
 
 namespace ContactManager
 {
-    class DBHandler
+    public sealed class DBHandler
     {
+        DBHandler() { }
+        static readonly DBHandler dBHandlerInstance = new DBHandler();
         readonly string ConString = ConfigurationManager.ConnectionStrings["Contacts"].ConnectionString;
 
+        public static DBHandler Instance
+        {
+            get { return dBHandlerInstance; }
+        }
 
         public List<Person> ReadAllPersons()
         {
@@ -116,7 +122,7 @@ namespace ContactManager
             {
                 con.Open();
 
-                string query = "UPDATE Person SET FirstName = @FirstName, LastName = @LastName, Email = @Email, Phone = @Phone, WHERE Id = @Id";
+                string query = "UPDATE Person SET FirstName = @FirstName, LastName = @LastName, Email = @Email, Phone = @Phone WHERE Id = @Id";
 
                 SqlCommand command = new SqlCommand(query, con);
                 command.Parameters.AddWithValue("@Id", person.Id);
