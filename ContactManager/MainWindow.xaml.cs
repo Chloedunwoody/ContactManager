@@ -153,7 +153,6 @@ namespace ContactManager
             saveFileDialog.Filter = "CSV file (*.csv)|*.csv|Text file (*.txt)|*.txt";
             if (saveFileDialog.ShowDialog() == true)
             {
-                int nbLines = contactsList.Count();
                 File.WriteAllText(saveFileDialog.FileName, header);
                 foreach (Person p in contactsList)
                 {
@@ -161,7 +160,7 @@ namespace ContactManager
                     File.AppendAllText(saveFileDialog.FileName,csvInput);
                     
                 }
-                MessageBox.Show("Export Successful", "Warning!", MessageBoxButton.OK);
+                MessageBox.Show("Export Successful", "Success!", MessageBoxButton.OK);
 
             }
         }
