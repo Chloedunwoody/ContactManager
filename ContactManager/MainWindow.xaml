@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ContactManager"
         xmlns:system="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="Contact Manager" Height="450" Width="800">
+        Title="Contact Manager" Height="450" Width="500">
 
     <DockPanel  Loaded="Data_Loader" >
        
@@ -19,21 +19,10 @@
             <ListView.ItemTemplate>
                 <DataTemplate >
                     <WrapPanel >
-                        <TextBlock Text="Id: "/>
-                        <TextBlock Text="{Binding Id}"/>
-                        <TextBlock Text=", "/>
                         <TextBlock Text="Name: "/>
                         <TextBlock Text="{Binding FirstName}" FontWeight="Bold" />
                         <TextBlock Text=" "/>
                         <TextBlock Text="{Binding LastName}" FontWeight="Bold"/>
-                        <TextBlock Text=", "/>
-                        <TextBlock Text="Email: "/>
-                        <TextBlock Text=" (" />
-                        <TextBlock Text="{Binding Email}" TextDecorations="Underline" Foreground="Blue" Cursor="Hand"/>
-                        <TextBlock Text=")"/>
-                        <TextBlock Text=", "/>
-                        <TextBlock Text="Phone: "/>
-                        <TextBlock Text="{Binding Phone}" FontWeight="Bold"/>
                     </WrapPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>

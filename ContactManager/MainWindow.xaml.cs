@@ -23,13 +23,12 @@ namespace ContactManager
     {
         ObservableCollection<Person> contactsList = new ObservableCollection<Person>();
         DBHandler db = DBHandler.Instance;
-        //private int lastSelectedChoice = -1;
+       
 
 
         public MainWindow()
         {
             InitializeComponent();
-            //lastSelectedChoice = contactsList.Sele
             MouseDoubleClick += MainWindow_MouseDoubleClick;
             //MouseLeftButtonDown += MainWindow_MouseLeftButtonDown;
 
@@ -47,15 +46,14 @@ namespace ContactManager
 
         private void MainWindow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            int pId = -1;
-            foreach (object o in lvDataBinding.SelectedItems)
+            List<Person> people = new List<Person>();
+            if (lvDataBinding.SelectedItem != null)
             {
-                pId = (lvDataBinding.SelectedItem as Person).Id;
-            }
-            if (pId != -1)
-            {
-                UpadatePerson upadatePerson = new UpadatePerson(pId);
-                upadatePerson.ShowDialog();
+                foreach (object o in lvDataBinding.SelectedItems)
+                    people.Add(o as Person); 
+
+                FullContactInfo fullContact = new FullContactInfo(people);
+                fullContact.ShowDialog();
             }
         }
 
@@ -65,8 +63,7 @@ namespace ContactManager
         }
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
-        {
-         
+        {        
             AddPerson addPerson = new AddPerson();
             addPerson.ShowDialog();
         }
@@ -93,7 +90,7 @@ namespace ContactManager
                 MessageBoxResult result = MessageBox.Show("Are you sure you want delete this contact?", "Warning!", MessageBoxButton.YesNoCancel);
 
                 switch (result)
-                {
+                {   
                     case MessageBoxResult.Yes:
                         db.DeletePerson(person.Id);
                         break;
@@ -112,8 +109,8 @@ namespace ContactManager
         {
             lvDataBinding.ItemsSource = contactsList;
             contactsList.Clear();
-            List<Person> Peoplpe = db.ReadAllPersons();
-            foreach (var person in Peoplpe)
+            List<Person> People = db.ReadAllPersons();
+            foreach (var person in People)
             {
                 contactsList.Add(person);
             }
