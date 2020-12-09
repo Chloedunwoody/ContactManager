@@ -23,31 +23,29 @@ namespace ContactManager
     {
         ObservableCollection<Person> contactsList = new ObservableCollection<Person>();
         DBHandler db = DBHandler.Instance;
+        //private int lastSelectedChoice = -1;
+
 
         public MainWindow()
         {
             InitializeComponent();
+            //lastSelectedChoice = contactsList.Sele
+            MouseDoubleClick += MainWindow_MouseDoubleClick;
+            //MouseLeftButtonDown += MainWindow_MouseLeftButtonDown;
 
         }
-        //private void Data_Loader(object sender, RoutedEventArgs e)
-        //{        
-        //    List<Person> Peoplpe = db.ReadAllPersons();
-        //    foreach (var person in Peoplpe) 
-        //    { 
-        //        contactsList.Add(person);
+
+        //private void MainWindow_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        //{
+        //    int pId = -1;
+        //    foreach (object o in lvDataBinding.SelectedItems)
+        //    {
+        //        pId = (lvDataBinding.SelectedItem as Person).Id;
         //    }
-        //    lvDataBinding.ItemsSource = contactsList;
+        //    lastSelectedChoice = pId;
         //}
 
-
-        private void AddButton_Click(object sender, RoutedEventArgs e)
-        {
-            
-            AddPerson addPerson = new AddPerson();
-            addPerson.Show();
-        }
-
-        private void UpdateButton_Click(object sender, RoutedEventArgs e)
+        private void MainWindow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             int pId = -1;
             foreach (object o in lvDataBinding.SelectedItems)
@@ -59,20 +57,58 @@ namespace ContactManager
                 UpadatePerson upadatePerson = new UpadatePerson(pId);
                 upadatePerson.ShowDialog();
             }
+        }
+
+        private void Data_Loader(object sender, RoutedEventArgs e)
+        {
+            UpdateList();
+        }
+
+        private void AddButton_Click(object sender, RoutedEventArgs e)
+        {
+         
+            AddPerson addPerson = new AddPerson();
+            addPerson.ShowDialog();
+        }
+
+        private void UpdateButton_Click(object sender, RoutedEventArgs e)
+        {
+            if(lvDataBinding.SelectedItem != null)
+            {
+                UpadatePerson upadatePerson = new UpadatePerson((lvDataBinding.SelectedItem as Person).Id);
+                upadatePerson.ShowDialog();
+            }
             else 
             {
                 MessageBox.Show("Chose a person to update","Warning!", MessageBoxButton.OK);
             }
-            
-
+            UpdateList();
         }
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
+            if (lvDataBinding.SelectedItem != null)
+            {
+                var person = lvDataBinding.SelectedItem as Person;
+                MessageBoxResult result = MessageBox.Show("Are you sure you want delete this contact?", "Warning!", MessageBoxButton.YesNoCancel);
 
+                switch (result)
+                {
+                    case MessageBoxResult.Yes:
+                        db.DeletePerson(person.Id);
+                        break;
+                    default:
+                        break;
+                }
+            }          
+            else
+            {
+                MessageBox.Show("Chose a person to update", "Warning!", MessageBoxButton.OK);
+            }
+            UpdateList();
         }
 
-        private void MainWindow_Activated(object sender, EventArgs e)
+        public void UpdateList()
         {
             lvDataBinding.ItemsSource = contactsList;
             contactsList.Clear();
@@ -82,8 +118,6 @@ namespace ContactManager
                 contactsList.Add(person);
             }
             lvDataBinding.ItemsSource = contactsList;
-
         }
-
     }       
 }

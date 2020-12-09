@@ -30,7 +30,31 @@ namespace ContactManager
         }
         private void SavePersonButton_Click(object sender, RoutedEventArgs e)
         {
+            Person addedPerson = new Person();
+            addedPerson.FirstName = FirstNameBox.Text;
+            addedPerson.LastName = LastNameBox.Text;
+            addedPerson.Email = EmailBox.Text;
+            addedPerson.Phone = PhoneBox.Text;
 
+            MessageBoxResult result = MessageBox.Show("Are you sure you want to save those changes?", "Warning!", MessageBoxButton.YesNoCancel);
+
+            switch (result)
+            {
+                case MessageBoxResult.Yes:
+                    db.AddPerson(addedPerson);
+                    (Application.Current.MainWindow as MainWindow).UpdateList();
+                    this.Close();
+                    break;
+                case MessageBoxResult.No:
+                    break;
+                case MessageBoxResult.Cancel:
+                    this.Close();
+                    break;
+                default:
+                    this.Close();
+                    break;
+
+            }
         }
     }
 }

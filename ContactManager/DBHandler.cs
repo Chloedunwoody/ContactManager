@@ -60,7 +60,7 @@ namespace ContactManager
                 SqlCommand command = new SqlCommand("Select * from Person WHERE Id = @Id", con);
                 command.Parameters.AddWithValue("@Id", id);
 
-            
+
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
 
@@ -79,7 +79,7 @@ namespace ContactManager
                 return person;
             }
         }
-              
+
         public int AddPerson(Person person)
         {
             int newID = 0;
@@ -95,8 +95,8 @@ namespace ContactManager
 
                 command.Parameters.AddWithValue("@FirstName", person.FirstName);
                 command.Parameters.AddWithValue("@LastName", person.LastName);
-                command.Parameters.AddWithValue("@City", person.Email);
-                command.Parameters.AddWithValue("@Age", person.Phone);
+                command.Parameters.AddWithValue("@Email", person.Email);
+                command.Parameters.AddWithValue("@Phone", person.Phone);
 
                 try
                 {
@@ -142,5 +142,25 @@ namespace ContactManager
                 return row;
             }
         }
+
+        public void DeletePerson(int Id)
+        {
+            using (SqlConnection con = new SqlConnection(ConString))
+            {
+                con.Open();
+                string query = $"DELETE FROM Person WHERE Id = {Id}";
+
+                SqlCommand command = new SqlCommand(query, con);
+
+                try
+                {
+                    command.ExecuteNonQuery();
+                }
+                catch (SqlException e)
+                {
+                    Console.WriteLine("Error Generated. Details: " + e.ToString());
+                }
+            }
+        } 
     }
 }

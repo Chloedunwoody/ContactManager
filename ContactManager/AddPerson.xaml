@@ -6,36 +6,37 @@
         xmlns:local="clr-namespace:ContactManager"
         xmlns:system="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="AddPerson" Height="450" Width="800">
+        Title="AddPerson" Height="300" Width="500">
     
     <DockPanel>
         <StackPanel DockPanel.Dock="Right">
             <Button x:Name="SavePerson" Content="Save new Person" Margin="5,20,5,0" Click="SavePersonButton_Click"/>
         </StackPanel>
-        <ListView Margin="10" x:Name="lvDataBinding">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel>
-                        <WrapPanel>
-                            <Label Content="First Name: " FontWeight="Bold"/>
-                            <TextBox Text="{Binding FirstName}"/>
-                        </WrapPanel>
-                        <WrapPanel>
-                            <Label Content="Last Name: " FontWeight="Bold"/>
-                            <TextBox Text="{Binding LastName}" />
-                        </WrapPanel>
-                        <WrapPanel>
-                            <Label Content="Email: " FontWeight="Bold"/>
-                            <TextBox Text="{Binding Email}"/>
-                        </WrapPanel>
-                        <WrapPanel>
-                            <Label Content="Phone: " FontWeight="Bold"/>
-                            <TextBox Text="{Binding Phone}" />
-                        </WrapPanel>
-                    </StackPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            
+            <Label Content="First Name: " FontWeight="Bold" Grid.Column="0" Grid.Row="0"/>
+            <TextBox x:Name="FirstNameBox" Grid.Column="1" Grid.Row="0"/>
+
+            <Label Content="Last Name: " FontWeight="Bold" Grid.Column="0" Grid.Row="1"/>
+            <TextBox x:Name="LastNameBox" Grid.Column="1" Grid.Row="1"/>
+
+            <Label Content="Email: " FontWeight="Bold" Grid.Column="0" Grid.Row="2"/>
+            <TextBox x:Name="EmailBox" Grid.Column="1" Grid.Row="2"/>
+
+            <Label Content="Phone: " FontWeight="Bold" Grid.Column="0" Grid.Row="3"/>
+            <TextBox x:Name="PhoneBox" Grid.Column="1" Grid.Row="3"/>
+
+        </Grid>
     </DockPanel>
 
 </Window>

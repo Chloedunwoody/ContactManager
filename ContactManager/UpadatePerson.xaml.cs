@@ -46,7 +46,7 @@ namespace ContactManager
             {
                 case MessageBoxResult.Yes:
                     db.UpdatePerson(updatedPerson);
-                    
+                    (Application.Current.MainWindow as MainWindow).UpdateList();
                     this.Close();
                     break;
                 case MessageBoxResult.No:
