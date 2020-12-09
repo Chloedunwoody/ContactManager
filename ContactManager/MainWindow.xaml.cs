@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -85,5 +87,52 @@ namespace ContactManager
 
         }
 
+        private void ImportButton_Click(object sender, RoutedEventArgs e)
+        {
+            DBHandler db = DBHandler.Instance;
+            char[] delimeterChar = { ';', ',' };
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "CSV file (*.csv)|*.csv|All files(*.*)|*.*";
+            openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            if (openFileDialog.ShowDialog() == true)
+            {
+                int nbLines = File.ReadAllLines(openFileDialog.FileName).Length; 
+                foreach(var line in File.ReadAllLines(openFileDialog.FileName))
+                {
+                    string[] tempPerson = line.Split(delimeterChar);
+                    foreach(var n in tempPerson)
+                    {
+                        Person newPerson = new Person(tempPerson[0], tempPerson[1], tempPerson[2], tempPerson[3]);
+                        db.AddPerson(newPerson);
+                    }
+
+                }
+ 
+            }
+                 
+        }
+
+        private void ExportButton_Click(object sender, RoutedEventArgs e)
+        {
+            char[] delimeterChar = { ';', ',' };
+            var csv = new StringBuilder();
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "CSV file (*.csv)|*.csv|Text file (*.txt)|*.txt";
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                int nbLines = contactsList.Count();
+                while (nbLines >= 0)
+                {
+                    //Will deal with it tmrw
+                    nbLines--;
+                }
+
+                    }
+
+                }
+
+            }
+
+        }
     }       
 }

@@ -9,7 +9,7 @@
         Title="UpadatePerson" Height="300" Width="500">
     <DockPanel Loaded="ChosenPerson_Loaded">
         <StackPanel DockPanel.Dock="Right">
-            <Button x:Name="SavePerson" Content="Save new Person" Margin="5,20,5,0" Click="SavePersonButton_Click"/>
+            <Button x:Name="SavePerson" Content="Save Updated Person" Margin="5,20,5,0" Click="SavePersonButton_Click"/>
         </StackPanel>
         <StackPanel>
             <StackPanel>
