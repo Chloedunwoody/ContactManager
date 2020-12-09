@@ -166,5 +166,4 @@ namespace ContactManager
             }
 
         }
-    }       
-}
+     

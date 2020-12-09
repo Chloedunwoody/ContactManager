@@ -118,5 +118,12 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Assets\exportExelButtonImage.png" />
+    <Resource Include="Assets\importExelButtonImage.png" />
+    <Resource Include="Assets\personAddButtonImage.png" />
+    <Resource Include="Assets\personDeleteButtonImage.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
