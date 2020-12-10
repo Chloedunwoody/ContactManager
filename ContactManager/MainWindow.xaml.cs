@@ -158,13 +158,14 @@ namespace ContactManager
                 int nbLines = File.ReadAllLines(openFileDialog.FileName).Length;
                 foreach (var line in File.ReadAllLines(openFileDialog.FileName))
                 {
-
+                    MessageBox.Show(line.ToString());
                     string[] tempPerson = line.Split(delimeterChar);
-                        Person newPerson = new Person(tempPerson[0], tempPerson[1], tempPerson[2], tempPerson[3]);
-                        db.AddPerson(newPerson);
-                        UpdateList();
 
+                    Person newPerson = new Person(tempPerson[0], tempPerson[1], tempPerson[2], tempPerson[3]);
+                    db.AddPerson(newPerson);
+                    UpdateList();
                 }
+                
 
             }
 
@@ -205,6 +206,20 @@ namespace ContactManager
             popup_uc.IsOpen = false;
         }
 
+        private void UpdateButton_MouseEnter(object sender, MouseEventArgs e)
+        {
+            popup_uc.PlacementTarget = UpdateButton;
+            popup_uc.Placement = PlacementMode.Right;
+            popup_uc.IsOpen = true;
+            Header.PopupText.Text = "Update a Contact";
+
+        }
+
+        private void UpdateButton_MouseLeave(object sender, MouseEventArgs e)
+        {
+            popup_uc.Visibility = Visibility.Collapsed;
+            popup_uc.IsOpen = false;
+        }
         private void DeleteButton_MouseEnter(object sender, MouseEventArgs e)
         {
             popup_uc.PlacementTarget = DeleteButton;
@@ -275,6 +290,7 @@ namespace ContactManager
         {
             this.WindowState = WindowState.Minimized;
         }
+
     }
 
 }

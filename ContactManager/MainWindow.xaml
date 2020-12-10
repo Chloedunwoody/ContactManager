@@ -11,7 +11,7 @@
         AllowsTransparency="True"
         Background="Transparent">
 
-    
+
     <Window.Resources>
         <Style TargetType="Button" x:Key="ButtonStyles">
             <Setter Property="Background" Value="Transparent"/>
@@ -22,10 +22,7 @@
 
 
     <Grid Loaded="Data_Loader" Background="#1C2F3E">
-
-
         <ListView Margin="97,51,10,65" Background="Transparent" BorderBrush="Black" x:Name="lvDataBinding" >
-
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel>
@@ -34,26 +31,6 @@
                         <TextBlock Text=" "/>
                         <TextBlock Text="{Binding LastName}" FontWeight="Bold" Foreground="#E0FFFF"/>
                     </WrapPanel>
-
-
-                    <!--<ListView Margin="10">
-                                    <ListView.View>
-                                        <GridView>
-                                            <GridViewColumn Header="Id" Width="120" DisplayMemberBinding="{Binding Id}"/>
-                                            <GridViewColumn Header="First Name" Width="120" DisplayMemberBinding="{Binding FirstName}"/>
-                                            <GridViewColumn Header="Last Name" Width="120" DisplayMemberBinding="{Binding LastName}"/>
-                                            <GridViewColumn Header="Email" Width="150">
-                                                <GridViewColumn.CellTemplate>
-                                                    <DataTemplate>
-                                                        <TextBlock Text="{Binding Email}" TextDecorations="Underline" Foreground="Blue" />
-                                                    </DataTemplate>
-                                                </GridViewColumn.CellTemplate>
-                                            </GridViewColumn>
-                                            <GridViewColumn Header="Phone" Width="120" DisplayMemberBinding="{Binding Phone}" />
-                                        </GridView>
-                                    </ListView.View>
-                                </ListView>-->
-
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
@@ -62,9 +39,10 @@
             <Button x:Name="AddButton"  Margin="25,120,25,0" Click="AddButton_Click" Style="{StaticResource ButtonStyles}" MouseEnter="AddButton_MouseEnter" MouseLeave="AddButton_MouseLeave">
                 <Image Source="Assets/personAddButtonImage.png"  Height="30" Width="30"/>
             </Button>
-            <Button x:Name="UpdateButton" Content="To be changed"  Margin="5,20,5,0" Click="UpdateButton_Click" Style="{StaticResource ButtonStyles}">
-
+            <Button x:Name="UpdateButton" Margin="25,20,25,0" Click="UpdateButton_Click" Style="{StaticResource ButtonStyles}" MouseEnter="UpdateButton_MouseEnter" MouseLeave="UpdateButton_MouseLeave">
+                <Image Source="Assets/personUpdateButtonImage3.png"  Height="30" Width="30" />
             </Button>
+
             <Button x:Name="DeleteButton"  Margin="25,20,25,0" Click="DeleteButton_Click" Style="{StaticResource ButtonStyles}" MouseEnter="DeleteButton_MouseEnter" MouseLeave="DeleteButton_MouseLeave">
                 <Image Source="Assets/personDeleteButtonImage.png"  Height="30" Width="30"/>
             </Button>
