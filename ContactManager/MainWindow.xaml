@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ContactManager"
         xmlns:system="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="Contact Manager" Height="550" Width="800"
+        Title="Contact Manager" Height="550" Width="600"
         WindowStyle="None"
         AllowsTransparency="True"
         Background="Transparent">
@@ -16,7 +16,12 @@
         <Style TargetType="Button" x:Key="ButtonStyles">
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="BorderBrush" Value="Transparent"/>
-
+        </Style>
+        <Style TargetType="TextBlock" x:Key="ContactStyles">
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="#E0FFFF"/>
+            <Setter Property="FontSize" Value="16"/>
+            
         </Style>
     </Window.Resources>
 
@@ -26,14 +31,15 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel>
-                        <TextBlock Text="Name: " Foreground="#E0FFFF"/>
-                        <TextBlock Text="{Binding FirstName}" FontWeight="Bold" Foreground="#E0FFFF"/>
+                        <Image Source="/Assets/personDefault.png"  Height="20" Width="20" Margin="2"/>
+                        <TextBlock Text="{Binding FirstName}" Style="{StaticResource ContactStyles}"/>
                         <TextBlock Text=" "/>
-                        <TextBlock Text="{Binding LastName}" FontWeight="Bold" Foreground="#E0FFFF"/>
+                        <TextBlock Text="{Binding LastName}" Style="{StaticResource ContactStyles}"/>
                     </WrapPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+
 
         <StackPanel Background="#14212B" HorizontalAlignment="Left">
             <Button x:Name="AddButton"  Margin="25,120,25,0" Click="AddButton_Click" Style="{StaticResource ButtonStyles}" MouseEnter="AddButton_MouseEnter" MouseLeave="AddButton_MouseLeave">

@@ -154,22 +154,27 @@ namespace ContactManager
             openFileDialog.Filter = "CSV file (*.csv)|*.csv|All files(*.*)|*.*";
             openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             if (openFileDialog.ShowDialog() == true)
-            {
-                int nbLines = File.ReadAllLines(openFileDialog.FileName).Length;
-                foreach (var line in File.ReadAllLines(openFileDialog.FileName))
+
+                try
                 {
-                    MessageBox.Show(line.ToString());
-                    string[] tempPerson = line.Split(delimeterChar);
+                    int nbLines = File.ReadAllLines(openFileDialog.FileName).Length;
+                    foreach (var line in File.ReadAllLines(openFileDialog.FileName))
+                    {
+                        MessageBox.Show(line.ToString());
+                        string[] tempPerson = line.Split(delimeterChar);
 
-                    Person newPerson = new Person(tempPerson[0], tempPerson[1], tempPerson[2], tempPerson[3]);
-                    db.AddPerson(newPerson);
-                    UpdateList();
+                        Person newPerson = new Person(tempPerson[0], tempPerson[1], tempPerson[2], tempPerson[3]);
+                        db.AddPerson(newPerson);
+                        UpdateList();
+                    }
                 }
-                
-
-            }
-
+                catch (Exception ex)                
+                {
+                    MessageBox.Show("An Error has occured:"+ ex.Message, "Warning!", MessageBoxButton.OK);
+                }
         }
+
+    
 
         private void ExportButton_Click(object sender, RoutedEventArgs e)
         {
@@ -180,13 +185,16 @@ namespace ContactManager
             if (saveFileDialog.ShowDialog() == true)
             {
                 File.WriteAllText(saveFileDialog.FileName, header);
-                foreach (Person p in contactsList)
-                {
-                    csvInput = string.Format("{0},{1},{2},{3}\n", p.Id, p.FirstName,p.LastName,p.Email,p.Phone);
-                    File.AppendAllText(saveFileDialog.FileName,csvInput);
-                    
-                }
-                MessageBox.Show("Export Successful", "Success!", MessageBoxButton.OK);
+
+                    foreach (Person p in contactsList)
+                    {
+                        csvInput = string.Format("{0},{1},{2},{3},{4}\n", p.Id, p.FirstName, p.LastName, p.Email, p.Phone);
+                        File.AppendAllText(saveFileDialog.FileName, csvInput);
+
+                    }
+
+                    MessageBox.Show("Export Successful", "Success!", MessageBoxButton.OK);
+
 
             }
 
