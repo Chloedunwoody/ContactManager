@@ -6,8 +6,12 @@
         xmlns:local="clr-namespace:ContactManager"
         xmlns:system="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="Contact Manager" Height="450" Width="500">
+        Title="Contact Manager" Height="550" Width="800"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent">
 
+    
     <Window.Resources>
         <Style TargetType="Button" x:Key="ButtonStyles">
             <Setter Property="Background" Value="Transparent"/>
@@ -17,24 +21,85 @@
     </Window.Resources>
 
 
-    <DockPanel  Loaded="Data_Loader"  Background="#1C2F3E">
-        <StackPanel DockPanel.Dock="Right" Background="#14212B">
-            <Button x:Name="AddButton"  Margin="25,20,25,0" Click="AddButton_Click" Style="{StaticResource ButtonStyles}">
+    <Grid Loaded="Data_Loader" Background="#1C2F3E">
+
+
+        <ListView Margin="97,51,10,65" Background="Transparent" BorderBrush="Black" x:Name="lvDataBinding" >
+           
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <WrapPanel>
+                            <TextBlock Text="Name: " Foreground="#E0FFFF"/>
+                            <TextBlock Text="{Binding FirstName}" FontWeight="Bold" Foreground="#E0FFFF"/>
+                            <TextBlock Text=" "/>
+                            <TextBlock Text="{Binding LastName}" FontWeight="Bold" Foreground="#E0FFFF"/>
+                        </WrapPanel>                       
+                    
+                    
+                    <!--<ListView Margin="10">
+                                    <ListView.View>
+                                        <GridView>
+                                            <GridViewColumn Header="Id" Width="120" DisplayMemberBinding="{Binding Id}"/>
+                                            <GridViewColumn Header="First Name" Width="120" DisplayMemberBinding="{Binding FirstName}"/>
+                                            <GridViewColumn Header="Last Name" Width="120" DisplayMemberBinding="{Binding LastName}"/>
+                                            <GridViewColumn Header="Email" Width="150">
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock Text="{Binding Email}" TextDecorations="Underline" Foreground="Blue" />
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                            <GridViewColumn Header="Phone" Width="120" DisplayMemberBinding="{Binding Phone}" />
+                                        </GridView>
+                                    </ListView.View>
+                                </ListView>-->
+                            
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <StackPanel Background="#14212B" HorizontalAlignment="Left">
+            <Button x:Name="AddButton"  Margin="25,120,25,0" Click="AddButton_Click" Style="{StaticResource ButtonStyles}" MouseEnter="AddButton_MouseEnter" MouseLeave="AddButton_MouseLeave">
                 <Image Source="Assets/personAddButtonImage.png"  Height="30" Width="30"/>
             </Button>
             <Button x:Name="UpdateButton" Content="To be changed"  Margin="5,20,5,0" Click="UpdateButton_Click" Style="{StaticResource ButtonStyles}">
-                
+
             </Button>
-            <Button x:Name="DeleteButton"  Margin="25,20,25,0" Click="DeleteButton_Click" Style="{StaticResource ButtonStyles}">
+            <Button x:Name="DeleteButton"  Margin="25,20,25,0" Click="DeleteButton_Click" Style="{StaticResource ButtonStyles}" MouseEnter="DeleteButton_MouseEnter" MouseLeave="DeleteButton_MouseLeave">
                 <Image Source="Assets/personDeleteButtonImage.png"  Height="30" Width="30"/>
             </Button>
-            <Button x:Name="ImportButton"   Margin="25,20,25,0" Click="ImportButton_Click" Style="{StaticResource ButtonStyles}">
+            <Button x:Name="ImportButton"   Margin="25,20,25,0" Click="ImportButton_Click" Style="{StaticResource ButtonStyles}" MouseEnter="ImportButton_MouseEnter" MouseLeave="ImportButton_MouseLeave">
                 <Image Source="Assets/importExelButtonImage.png"  Height="30" Width="30"/>
             </Button>
-            <Button x:Name="ExportButton"  Margin="25,20,25,0" Click="ExportButton_Click" Style="{StaticResource ButtonStyles}">
+            <Button x:Name="ExportButton"  Margin="25,20,25,0" Click="ExportButton_Click" Style="{StaticResource ButtonStyles}" MouseEnter="ExportButton_MouseEnter" MouseLeave="ExportButton_MouseLeave">
                 <Image Source="Assets/exportExelButtonImage.png"  Height="30" Width="30"/>
             </Button>
         </StackPanel>
+
+        <Grid VerticalAlignment="Top" Height="46" Background="#233C4F" Grid.ColumnSpan="2" MouseDown="Grid_MouseDown">
+            <TextBlock Text="Contact Manager" FontFamily="open sans condensed" FontSize="26" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#E0FFFF"/>
+
+            <Button  Background="Transparent" Height="30" Width="30" BorderThickness="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,20,0" Click="PowerOff_Click" ToolTip="Close">
+                <Image Source="/Assets/PowerButtonImage.png" ToolTip="Close"/>
+            </Button>
+            <Button x:Name="MaximizeButton"  Background="Transparent" Height="30" Width="30" BorderThickness="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,8,69,8" Click="MaximizeButton_Click" ToolTip="Maximize">
+                <Image Source="/Assets/maximizeWindowButton.png" ToolTip="Maximize" />
+            </Button>
+            <Button x:Name="MinimizeButton" Background="Transparent" Height="30" Width="30" BorderThickness="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,8,119,8" Click="MinimizeButton_Click" ToolTip="Minimize">
+                <Image Source="/Assets/minimizeWindowButton.png" RenderTransformOrigin="0.643,-0.393" ToolTip="Minimize" />
+            </Button>
+        </Grid>
+
+        <Grid Height="60" VerticalAlignment="Bottom" Background ="#233C4F"/>
+
+        <Popup x:Name="popup_uc" AllowsTransparency="True" HorizontalOffset="10" VerticalOffset="10">
+
+            <Grid>
+                <local:PopupApp x:Name="Header" Foreground="#E0FFFF"/>
+            </Grid>
+        </Popup>
+        
+    </Grid>
         <ListView Margin="10" x:Name="lvDataBinding" Background="#1C2F3E" BorderBrush="Black">
             <ListView.ItemTemplate>
                 <DataTemplate >

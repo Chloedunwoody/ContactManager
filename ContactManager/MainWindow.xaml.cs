@@ -15,15 +15,18 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Controls.Primitives;
 
 namespace ContactManager
 {
+
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
         ObservableCollection<Person> contactsList = new ObservableCollection<Person>();
+        ObservableCollection<Person> InnerContactsList = new ObservableCollection<Person>();
         DBHandler db = DBHandler.Instance;
 
 
@@ -32,19 +35,23 @@ namespace ContactManager
         {
             InitializeComponent();
             MouseDoubleClick += MainWindow_MouseDoubleClick;
-            //MouseLeftButtonDown += MainWindow_MouseLeftButtonDown;
-
         }
 
-        //private void MainWindow_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        //{
-        //    int pId = -1;
-        //    foreach (object o in lvDataBinding.SelectedItems)
-        //    {
-        //        pId = (lvDataBinding.SelectedItem as Person).Id;
-        //    }
-        //    lastSelectedChoice = pId;
-        //}
+        private void ExpanderMain_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            //int getPersonId = -1;
+            //if (lvDataBinding.SelectedItem != null)
+            //{
+
+            //    getPersonId = (lvDataBinding.SelectedItem as Person).Id;
+            //    Person person = db.GetPerson(getPersonId);
+
+            //    person = IdTextBox.Text;
+
+
+
+            //}
+        }
 
         private void MainWindow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -88,13 +95,32 @@ namespace ContactManager
         {
             if (lvDataBinding.SelectedItem != null)
             {
-                var person = lvDataBinding.SelectedItem as Person;
+
+                List<Person> people = new List<Person>();
+
+                foreach (object o in lvDataBinding.SelectedItems)
+                { people.Add(o as Person); }
+
+                string listOfIds = "";
+
+                foreach (var p in people)
+                {
+                    if (listOfIds.Length > 0)
+                    {
+                        listOfIds += ",";
+                    }
+                    listOfIds += "'";
+                    listOfIds += p.Id;
+                    listOfIds += "'";
+
+                }
+
                 MessageBoxResult result = MessageBox.Show("Are you sure you want delete this contact?", "Warning!", MessageBoxButton.YesNoCancel);
 
                 switch (result)
                 {
                     case MessageBoxResult.Yes:
-                        db.DeletePerson(person.Id);
+                        db.DeletePerson(listOfIds);
                         break;
                     default:
                         break;
@@ -102,7 +128,7 @@ namespace ContactManager
             }
             else
             {
-                MessageBox.Show("Chose a person to update", "Warning!", MessageBoxButton.OK);
+                MessageBox.Show("Chose a person to delete", "Warning!", MessageBoxButton.OK);
             }
             UpdateList();
         }
@@ -117,6 +143,7 @@ namespace ContactManager
                 contactsList.Add(person);
             }
             lvDataBinding.ItemsSource = contactsList;
+            
         }
 
         private void ImportButton_Click(object sender, RoutedEventArgs e)
@@ -163,7 +190,94 @@ namespace ContactManager
                 MessageBox.Show("Export Successful", "Success!", MessageBoxButton.OK);
 
             }
+
+        }
+
+        private void AddButton_MouseEnter(object sender, MouseEventArgs e)
+        {
+            popup_uc.PlacementTarget = AddButton;
+            popup_uc.Placement = PlacementMode.Right;
+            popup_uc.IsOpen = true;
+            Header.PopupText.Text = "Add a Contact";
+        }
+
+        private void AddButton_MouseLeave(object sender, MouseEventArgs e)
+        {
+            popup_uc.Visibility = Visibility.Collapsed;
+            popup_uc.IsOpen = false;
+        }
+
+        private void DeleteButton_MouseEnter(object sender, MouseEventArgs e)
+        {
+            popup_uc.PlacementTarget = DeleteButton;
+            popup_uc.Placement = PlacementMode.Right;
+            popup_uc.IsOpen = true;
+            Header.PopupText.Text = "Delete a Contact";
+        }
+
+        private void DeleteButton_MouseLeave(object sender, MouseEventArgs e)
+        {
+            popup_uc.Visibility = Visibility.Collapsed;
+            popup_uc.IsOpen = false;
+        }
+
+        private void ImportButton_MouseEnter(object sender, MouseEventArgs e)
+        {
+            popup_uc.PlacementTarget = ImportButton;
+            popup_uc.Placement = PlacementMode.Right;
+            popup_uc.IsOpen = true;
+            Header.PopupText.Text = "Import Contacts"; 
+        }
+
+        private void ImportButton_MouseLeave(object sender, MouseEventArgs e)
+        {
+            popup_uc.Visibility = Visibility.Collapsed;
+            popup_uc.IsOpen = false;
+        }
+
+        private void ExportButton_MouseEnter(object sender, MouseEventArgs e)
+        {
+            popup_uc.PlacementTarget = ExportButton;
+            popup_uc.Placement = PlacementMode.Right;
+            popup_uc.IsOpen = true;
+            Header.PopupText.Text = "Export Contacts"; 
+        }
+
+        private void ExportButton_MouseLeave(object sender, MouseEventArgs e)
+        {
+            popup_uc.Visibility = Visibility.Collapsed;
+            popup_uc.IsOpen = false;
+        }
+
+        private void PowerOff_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+                DragMove();
+        }
+
+        private void MaximizeButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.WindowState == WindowState.Maximized)
+            {
+                this.WindowState = WindowState.Normal;
+            }
+            else
+            {
+                this.WindowState = WindowState.Maximized;
+            }
+            
+        }
+
+        private void MinimizeButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
         }
     }
+
 }
      
