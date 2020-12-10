@@ -25,17 +25,17 @@
 
 
         <ListView Margin="97,51,10,65" Background="Transparent" BorderBrush="Black" x:Name="lvDataBinding" >
-           
+
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel>
-                            <TextBlock Text="Name: " Foreground="#E0FFFF"/>
-                            <TextBlock Text="{Binding FirstName}" FontWeight="Bold" Foreground="#E0FFFF"/>
-                            <TextBlock Text=" "/>
-                            <TextBlock Text="{Binding LastName}" FontWeight="Bold" Foreground="#E0FFFF"/>
-                        </WrapPanel>                       
-                    
-                    
+                        <TextBlock Text="Name: " Foreground="#E0FFFF"/>
+                        <TextBlock Text="{Binding FirstName}" FontWeight="Bold" Foreground="#E0FFFF"/>
+                        <TextBlock Text=" "/>
+                        <TextBlock Text="{Binding LastName}" FontWeight="Bold" Foreground="#E0FFFF"/>
+                    </WrapPanel>
+
+
                     <!--<ListView Margin="10">
                                     <ListView.View>
                                         <GridView>
@@ -53,7 +53,7 @@
                                         </GridView>
                                     </ListView.View>
                                 </ListView>-->
-                            
+
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
@@ -98,19 +98,6 @@
                 <local:PopupApp x:Name="Header" Foreground="#E0FFFF"/>
             </Grid>
         </Popup>
-        
+
     </Grid>
-        <ListView Margin="10" x:Name="lvDataBinding" Background="#1C2F3E" BorderBrush="Black">
-            <ListView.ItemTemplate>
-                <DataTemplate >
-                    <WrapPanel >
-                        <TextBlock Text="Name: "/>
-                        <TextBlock Text="{Binding FirstName}" FontWeight="Bold" />
-                        <TextBlock Text=" "/>
-                        <TextBlock Text="{Binding LastName}" FontWeight="Bold"/>
-                    </WrapPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-    </DockPanel>
 </Window>
