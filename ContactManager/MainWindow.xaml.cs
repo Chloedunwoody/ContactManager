@@ -28,7 +28,7 @@ namespace ContactManager
         ObservableCollection<Person> contactsList = new ObservableCollection<Person>();
         ObservableCollection<Person> InnerContactsList = new ObservableCollection<Person>();
         DBHandler db = DBHandler.Instance;
-       
+
 
 
         public MainWindow()
@@ -59,7 +59,7 @@ namespace ContactManager
             if (lvDataBinding.SelectedItem != null)
             {
                 foreach (object o in lvDataBinding.SelectedItems)
-                    people.Add(o as Person); 
+                    people.Add(o as Person);
 
                 FullContactInfo fullContact = new FullContactInfo(people);
                 fullContact.ShowDialog();
@@ -72,21 +72,21 @@ namespace ContactManager
         }
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
-        {        
+        {
             AddPerson addPerson = new AddPerson();
             addPerson.ShowDialog();
         }
 
         private void UpdateButton_Click(object sender, RoutedEventArgs e)
         {
-            if(lvDataBinding.SelectedItem != null)
+            if (lvDataBinding.SelectedItem != null)
             {
                 UpadatePerson upadatePerson = new UpadatePerson((lvDataBinding.SelectedItem as Person).Id);
                 upadatePerson.ShowDialog();
             }
-            else 
+            else
             {
-                MessageBox.Show("Chose a person to update","Warning!", MessageBoxButton.OK);
+                MessageBox.Show("Chose a person to update", "Warning!", MessageBoxButton.OK);
             }
             UpdateList();
         }
@@ -118,14 +118,14 @@ namespace ContactManager
                 MessageBoxResult result = MessageBox.Show("Are you sure you want delete this contact?", "Warning!", MessageBoxButton.YesNoCancel);
 
                 switch (result)
-                {   
+                {
                     case MessageBoxResult.Yes:
                         db.DeletePerson(listOfIds);
                         break;
                     default:
                         break;
                 }
-            }          
+            }
             else
             {
                 MessageBox.Show("Chose a person to delete", "Warning!", MessageBoxButton.OK);
@@ -155,36 +155,39 @@ namespace ContactManager
             openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             if (openFileDialog.ShowDialog() == true)
             {
-                int nbLines = File.ReadAllLines(openFileDialog.FileName).Length; 
-                foreach(var line in File.ReadAllLines(openFileDialog.FileName))
+                int nbLines = File.ReadAllLines(openFileDialog.FileName).Length;
+                foreach (var line in File.ReadAllLines(openFileDialog.FileName))
                 {
                     string[] tempPerson = line.Split(delimeterChar);
-                    foreach(var n in tempPerson)
+                    foreach (var n in tempPerson)
                     {
                         Person newPerson = new Person(tempPerson[0], tempPerson[1], tempPerson[2], tempPerson[3]);
                         db.AddPerson(newPerson);
+                        UpdateList();
                     }
 
                 }
- 
+
             }
-                 
+
         }
 
         private void ExportButton_Click(object sender, RoutedEventArgs e)
         {
-            char[] delimeterChar = { ';', ',' };
-            var csv = new StringBuilder();
+            string csvInput;
+            string header = "ID,First Name,Last Name,Email,Phone\n";
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "CSV file (*.csv)|*.csv|Text file (*.txt)|*.txt";
             if (saveFileDialog.ShowDialog() == true)
             {
-                int nbLines = contactsList.Count();
-                while (nbLines >= 0)
+                File.WriteAllText(saveFileDialog.FileName, header);
+                foreach (Person p in contactsList)
                 {
-                    //Will deal with it tmrw
-                    nbLines--;
+                    csvInput = string.Format("{0},{1},{2},{3}\n", p.Id, p.FirstName,p.LastName,p.Email,p.Phone);
+                    File.AppendAllText(saveFileDialog.FileName,csvInput);
+                    
                 }
+                MessageBox.Show("Export Successful", "Success!", MessageBoxButton.OK);
 
             }
 
