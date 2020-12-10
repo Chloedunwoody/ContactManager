@@ -143,12 +143,12 @@ namespace ContactManager
             }
         }
 
-        public void DeletePerson(int Id)
+        public void DeletePerson(string listOfIds)
         {
             using (SqlConnection con = new SqlConnection(ConString))
             {
                 con.Open();
-                string query = $"DELETE FROM Person WHERE Id = {Id}";
+                string query = $"DELETE FROM Person WHERE Id IN ({listOfIds}) ";
 
                 SqlCommand command = new SqlCommand(query, con);
 
