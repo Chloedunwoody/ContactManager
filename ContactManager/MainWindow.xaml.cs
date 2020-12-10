@@ -158,13 +158,11 @@ namespace ContactManager
                 int nbLines = File.ReadAllLines(openFileDialog.FileName).Length;
                 foreach (var line in File.ReadAllLines(openFileDialog.FileName))
                 {
+
                     string[] tempPerson = line.Split(delimeterChar);
-                    foreach (var n in tempPerson)
-                    {
                         Person newPerson = new Person(tempPerson[0], tempPerson[1], tempPerson[2], tempPerson[3]);
                         db.AddPerson(newPerson);
                         UpdateList();
-                    }
 
                 }
 
