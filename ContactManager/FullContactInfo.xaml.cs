@@ -78,7 +78,7 @@ namespace ContactManager
 
         private void lvDataBinding_MouseEnter(object sender, MouseEventArgs e)
         {
-            lvDataBinding.Foreground = Brushes.Blue;
+            lvDataBinding.Foreground = Brushes.Black;
         }
 
 
