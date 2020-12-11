@@ -6,14 +6,20 @@
         xmlns:local="clr-namespace:ContactManager"
         xmlns:system="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="UpadatePerson" Height="300" Width="500">
-    <DockPanel Loaded="ChosenPerson_Loaded">
-        
-        <StackPanel DockPanel.Dock="Right">
-            <Button x:Name="SavePerson" Content="Save Updated Person" Margin="5,20,5,0" Click="SavePersonButton_Click"/>
-        </StackPanel>
-        
-        <Grid>
+        Title="UpadatePerson" Height="300" Width="500"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent">
+
+
+    <Window.Resources>
+        <Style TargetType="TextBox" x:Key="TextBoxStyle">
+            <Setter Property="Background" Value="#B1D4E0"/>
+        </Style>
+    </Window.Resources>
+    <Grid Loaded="ChosenPerson_Loaded" Background="#1C2F3E">
+
+        <Grid Margin="83,51,0,0" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -26,16 +32,43 @@
             </Grid.RowDefinitions>
 
             <Label Content="First Name: " FontWeight="Bold" Grid.Column="0" Grid.Row="0"/>
-            <TextBox x:Name="FirstNameBox" Grid.Column="1" Grid.Row="0"/>
+            <TextBox x:Name="FirstNameBox" Grid.Row="0" HorizontalAlignment="Right"  Width="338" Grid.ColumnSpan="2" Style="{StaticResource TextBoxStyle}"/>
 
             <Label Content="Last Name: " FontWeight="Bold" Grid.Column="0" Grid.Row="1"/>
-            <TextBox x:Name="LastNameBox" Grid.Column="1" Grid.Row="1"/>
+            <TextBox x:Name="LastNameBox" Grid.Row="1" Grid.ColumnSpan="2" Margin="79,0,0,0"  Style="{StaticResource TextBoxStyle}"/>
 
-            <Label Content="Email: " FontWeight="Bold" Grid.Column="0" Grid.Row="2"/>
-            <TextBox x:Name="EmailBox" Grid.Column="1" Grid.Row="2"/>
+            <Label FontWeight="Bold" Grid.Column="0" Grid.Row="2">
+                <Image Source="/Assets/EmailImage.png" Height="52" Width="54" />
+            </Label>
+            <TextBox x:Name="EmailBox" Grid.Row="2" Grid.ColumnSpan="2" Margin="79,0,0,0"  Style="{StaticResource TextBoxStyle}"/>
 
-            <Label Content="Phone: " FontWeight="Bold" Grid.Column="0" Grid.Row="3"/>
-            <TextBox x:Name="PhoneBox" Grid.Column="1" Grid.Row="3"/>
+            <Label FontWeight="Bold" Grid.Column="0" Grid.Row="3">
+                <Image Source="/Assets/Phone.png" />
+            </Label>
+            <TextBox x:Name="PhoneBox" Grid.Row="3" Grid.ColumnSpan="2" Margin="79,0,0,0"  Style="{StaticResource TextBoxStyle}"/>
         </Grid>
-    </DockPanel>
+
+        <StackPanel Background="#14212B" HorizontalAlignment="Left" Width="78">
+            <Button x:Name="SavePerson" Background="Transparent" BorderBrush="Transparent" Margin="10,80,10,0" Click="SavePersonButton_Click" Height="49">
+                <Image Source="/Assets/SaveButtonImage.png" />
+            </Button>
+        </StackPanel>
+
+        <Grid VerticalAlignment="Top" Height="46" Background="#233C4F" Grid.ColumnSpan="2" MouseDown="Grid_MouseDown">
+            <TextBlock Text="Update Contact" FontFamily="open sans condensed" FontSize="26" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#E0FFFF"/>
+
+            <Button  Background="Transparent" Height="22" Width="22" BorderThickness="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,20,0" Click="PowerOff_Click" ToolTip="Close">
+                <Image Source="/Assets/PowerButtonImage.png" ToolTip="Close"/>
+            </Button>
+            <Button x:Name="MaximizeButton"  Background="Transparent" Height="22" Width="22" BorderThickness="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,12,47,12" Click="MaximizeButton_Click" ToolTip="Maximize">
+                <Image Source="/Assets/maximizeWindowButton.png" ToolTip="Maximize" />
+            </Button>
+            <Button x:Name="MinimizeButton" Background="Transparent" Height="22" Width="22" BorderThickness="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,12,74,12" Click="MinimizeButton_Click" ToolTip="Minimize">
+                <Image Source="/Assets/minimizeWindowButton.png" RenderTransformOrigin="0.643,-0.393" ToolTip="Minimize" />
+            </Button>
+
+        </Grid>
+
+
+    </Grid>
 </Window>
