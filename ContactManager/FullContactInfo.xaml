@@ -9,16 +9,28 @@
         WindowStyle="None"
         AllowsTransparency="True"
         Background="Transparent">
+    <!--<Window.Resources>
+        <Style TargetType="" x:Key="ButtonStyles">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+        </Style>
+        <Style TargetType="TextBlock" x:Key="ContactStyles">
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="#E0FFFF"/>
+            <Setter Property="FontSize" Value="16"/>
+
+        </Style>
+    </Window.Resources>-->
     <Grid Background="#1C2F3E">
-        <ListView Margin="10,51,10,65" Background="Transparent" BorderBrush="Black" x:Name="lvDataBinding" >
+        <ListView Margin="10,51,10,65" Background="Transparent" Foreground="White" BorderBrush="Black" x:Name="lvDataBinding" MouseEnter="lvDataBinding_MouseEnter" MouseLeave="lvDataBinding_MouseLeave"  >
             <ListView.View>
-                <GridView >
+                <GridView>
                     <GridViewColumn Header="Id" Width="120" DisplayMemberBinding="{Binding Id}"/>
                     <GridViewColumn Header="First Name" Width="120" DisplayMemberBinding="{Binding FirstName}"/>
                     <GridViewColumn Header="Last Name" Width="120" DisplayMemberBinding="{Binding LastName}"/>
                     <GridViewColumn Header="Email" Width="150">
                     <GridViewColumn.CellTemplate>
-                        <DataTemplate>
+                        <DataTemplate >
                             <TextBlock Text="{Binding Email}" TextDecorations="Underline" Foreground="Blue" />
                         </DataTemplate>
                     </GridViewColumn.CellTemplate>

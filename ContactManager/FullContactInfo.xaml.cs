@@ -76,6 +76,20 @@ namespace ContactManager
             this.WindowState = WindowState.Minimized;
         }
 
+        private void lvDataBinding_MouseEnter(object sender, MouseEventArgs e)
+        {
+            lvDataBinding.Foreground = Brushes.Blue;
+        }
+
+
+        private void lvDataBinding_MouseLeave(object sender, MouseEventArgs e)
+        {
+            //if(lvDataBinding.Focus())           
+            //    lvDataBinding.Foreground = Brushes.Blue;           
+            //else
+            // Not sure about that
+            lvDataBinding.Foreground = Brushes.White;
+        }
     }
 }
 
