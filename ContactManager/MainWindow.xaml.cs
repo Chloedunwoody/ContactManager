@@ -160,7 +160,7 @@ namespace ContactManager
                     int nbLines = File.ReadAllLines(openFileDialog.FileName).Length;
                     foreach (var line in File.ReadAllLines(openFileDialog.FileName))
                     {
-                        MessageBox.Show(line.ToString());
+                        //MessageBox.Show(line.ToString());
                         string[] tempPerson = line.Split(delimeterChar);
 
                         Person newPerson = new Person(tempPerson[0], tempPerson[1], tempPerson[2], tempPerson[3]);
